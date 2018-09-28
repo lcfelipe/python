@@ -1,18 +1,13 @@
-
-# coding: utf-8
-
-# In[85]:
-
-
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.ui import WebDriverWait
-from bs4 import BeautifulSoup
+
 import re
 import pandas as pd
 from tabulate import tabulate
 import os
+from zipfile import ZipFile
 
 def every_downloads_chrome(driver):
     if not driver.current_url.startswith("chrome://downloads"):
@@ -45,3 +40,17 @@ print(paths)
 
 driver.close()
 
+a= str(paths)
+caminho =a[12:-2]
+
+# specifying the zip file name 
+file_name = caminho
+  
+# opening the zip file in READ mode 
+with ZipFile(file_name, 'r') as zip: 
+    # printing all the contents of the zip file 
+    zip.printdir()
+    # extracting all the files 
+    print('Extracting all the files now...') 
+    zip.extractall(path='/Users/xxx/Downloads/') 
+    print('Done!')
